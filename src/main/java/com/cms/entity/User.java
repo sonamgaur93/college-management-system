@@ -42,4 +42,7 @@ public class User {
 
     @Column(name = "updated_by")
     private Long updatedBy;
+
+    @Column(name = "user_name")
+    private String username;
 }
