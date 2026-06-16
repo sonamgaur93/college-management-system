@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cms</groupId>
-	<artifactId>cms-backend</artifactId>
+	<artifactId>college-management-system</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>
