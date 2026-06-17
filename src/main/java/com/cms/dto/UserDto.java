@@ -3,7 +3,7 @@ package com.cms.dto;
 import lombok.Data;
 
 @Data
-public class RegisterUser {
+public class UserDto {
 
     private String fullName;
 

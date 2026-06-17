@@ -37,4 +37,7 @@ public class Enquiry {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Column(name = "deleted")
+    private Boolean deleted = false;
 }

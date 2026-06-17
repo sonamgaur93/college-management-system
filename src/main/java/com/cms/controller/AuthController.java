@@ -1,5 +1,6 @@
 package com.cms.controller;
 
+import com.cms.constant.UriConstant;
 import com.cms.dto.LoginRequest;
 import com.cms.utility.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping(UriConstant.AUTH)
 public class AuthController {
 
     @Autowired
@@ -23,7 +24,7 @@ public class AuthController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @PostMapping("/login")
+    @PostMapping(UriConstant.LOGIN)
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         Authentication authentication = authenticationManager.getObject().authenticate(
                 new UsernamePasswordAuthenticationToken(
