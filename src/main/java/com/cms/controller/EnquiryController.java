@@ -35,8 +35,13 @@ public class EnquiryController {
     }
 
     @GetMapping(UriConstant.GET_ALL)
-    public ResponseEntity<List<EnquiryDto>> GetAll(@RequestParam("collegeCourseId") Long collegeCourseId) {
-        return new ResponseEntity<>(enquiryService.getAll(collegeCourseId), HttpStatus.OK);
+    public ResponseEntity<List<EnquiryDto>> GetAll(@RequestParam("collegeCourseId") Long collegeCourseId,
+                                                   @RequestParam(required = false) String search,
+                                                   @RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "10") int size,
+                                                   @RequestParam(defaultValue = "createdAt") String sortBy,
+                                                   @RequestParam(defaultValue = "desc") String sortOrder) {
+        return new ResponseEntity<>(enquiryService.getAll(collegeCourseId, search, page, size, sortBy, sortOrder), HttpStatus.OK);
     }
 
     @DeleteMapping(UriConstant.DELETE + "/{id}")

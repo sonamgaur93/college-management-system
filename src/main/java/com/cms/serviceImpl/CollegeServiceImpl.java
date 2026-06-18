@@ -1,5 +1,6 @@
 package com.cms.serviceImpl;
 
+import com.cms.dao.CollegeDao;
 import com.cms.dto.CollegeDto;
 import com.cms.entity.College;
 import com.cms.exception.GenericException;
@@ -22,6 +23,9 @@ public class CollegeServiceImpl implements CollegeService {
 
     @Autowired
     private CollegeMapper collegeMapper;
+
+    @Autowired
+    private CollegeDao collegeDao;
 
     @Override
     public College save(CollegeDto collegeDto) {
@@ -57,8 +61,8 @@ public class CollegeServiceImpl implements CollegeService {
     }
 
     @Override
-    public List<CollegeDto> getAll() {
-        List<College> colleges = collegeRepository.findAll();
+    public List<CollegeDto> getAll(String search, Boolean status, int page, int size, String sortBy, String sortOrder) {
+        List<College> colleges = collegeDao.findAllColleges(search, status, page, size, sortBy, sortOrder);
         List<CollegeDto> collegeDtos = new ArrayList<>();
 
         for (College college : colleges) {

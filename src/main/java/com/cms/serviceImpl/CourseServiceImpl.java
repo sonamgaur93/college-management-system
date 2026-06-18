@@ -1,5 +1,6 @@
 package com.cms.serviceImpl;
 
+import com.cms.dao.CourseDao;
 import com.cms.dto.CourseDto;
 import com.cms.entity.Course;
 import com.cms.exception.GenericException;
@@ -22,6 +23,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private CourseMapper courseMapper;
+
+    @Autowired
+    private CourseDao courseDao;
 
     @Override
     public Course save(CourseDto courseDto) {
@@ -50,8 +54,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseDto> getAll() {
-        List<Course> courses = courseRepository.findAll();
+    public List<CourseDto> getAll(String search, Boolean status, int page, int size, String sortBy, String sortOrder) {
+        List<Course> courses = courseDao.findAllCourses(search,status,page,size,sortBy,sortOrder);
         List<CourseDto> courseDtos = new ArrayList<>();
 
         for (Course course : courses) {

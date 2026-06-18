@@ -1,5 +1,6 @@
 package com.cms.serviceImpl;
 
+import com.cms.dao.CollegeCourseDao;
 import com.cms.dto.CollegeCourseDto;
 import com.cms.entity.College;
 import com.cms.entity.CollegeCourse;
@@ -32,6 +33,9 @@ public class CollegeCourseServiceImpl implements CollegeCourseService {
 
     @Autowired
     private CollegeCourseMapper collegeCourseMapper;
+
+    @Autowired
+    private CollegeCourseDao collegeCourseDao;
 
 
     @Override
@@ -76,8 +80,8 @@ public class CollegeCourseServiceImpl implements CollegeCourseService {
     }
 
     @Override
-    public List<CollegeCourseDto> getAll(Long collegeId, Long courseId) {
-        List<CollegeCourse> collegeCourseList = collegeCourseRepository.findByCollegeAndCourseId(collegeId, courseId);
+    public List<CollegeCourseDto> getAll(Long collegeId, Long courseId, String search, Boolean status, Boolean admissionOpen, int page, int size, String sortBy, String sortOrder) {
+        List<CollegeCourse> collegeCourseList = collegeCourseDao.findAllCollegeCourses(collegeId, courseId, search, status, admissionOpen, page, size, sortBy, sortOrder);
         List<CollegeCourseDto> collegeCourseDtos = new ArrayList<>();
 
         for (CollegeCourse collegeCourse : collegeCourseList) {

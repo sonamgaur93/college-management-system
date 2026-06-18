@@ -13,7 +13,7 @@ public interface CollegeService {
 
     CollegeDto getById(Long id);
 
-    List<CollegeDto> getAll();
+    List<CollegeDto> getAll(String search, Boolean status, int page, int size, String sortBy, String sortOrder);
 
     College delete(Long id);
 }

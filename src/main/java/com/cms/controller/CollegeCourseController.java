@@ -38,8 +38,15 @@ public class CollegeCourseController {
 
     @GetMapping(UriConstant.GET_ALL)
     public ResponseEntity<List<CollegeCourseDto>> GetAll(@RequestParam("collegeId") Long collegeId,
-                                                         @RequestParam("courseId") Long courseId) {
-        return new ResponseEntity<>(collegeCourseService.getAll(collegeId, courseId), HttpStatus.OK);
+                                                         @RequestParam("courseId") Long courseId,
+                                                         @RequestParam(required = false) String search,
+                                                         @RequestParam(required = false) Boolean status,
+                                                         @RequestParam(required = false) Boolean admissionOpen,
+                                                         @RequestParam(defaultValue = "0") int page,
+                                                         @RequestParam(defaultValue = "10") int size,
+                                                         @RequestParam(defaultValue = "createdAt") String sortBy,
+                                                         @RequestParam(defaultValue = "desc") String sortOrder) {
+        return new ResponseEntity<>(collegeCourseService.getAll(collegeId, courseId, search, status, admissionOpen, page, size, sortBy, sortOrder), HttpStatus.OK);
     }
 
     @DeleteMapping(UriConstant.DELETE + "/{id}")

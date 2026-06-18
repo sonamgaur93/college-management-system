@@ -13,7 +13,7 @@ public interface UserService {
 
     UserDto getById(Long id);
 
-    List<UserDto> getAll();
+    List<UserDto> getAll(String search, Boolean status, int page, int size, String sortBy, String sortOrder);
 
     User deleteUser(Long id);
 }

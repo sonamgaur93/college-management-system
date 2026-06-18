@@ -13,7 +13,7 @@ public interface CourseService {
 
     CourseDto getById(Long id);
 
-    List<CourseDto> getAll();
+    List<CourseDto> getAll(String search, Boolean status, int page, int size, String sortBy, String sortOrder);
 
     Course delete(Long id);
 }

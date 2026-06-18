@@ -13,7 +13,7 @@ public interface EnquiryService {
 
     EnquiryDto getById(Long id, Long collegeCourseId);
 
-    List<EnquiryDto> getAll(Long collegeCourseId);
+    List<EnquiryDto> getAll(Long collegeCourseId,String search, int page, int size, String sortBy, String sortOrder);
 
     EnquiryDto delete(Long id,  Long collegeCourseId);
 }

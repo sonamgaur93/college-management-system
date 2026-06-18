@@ -34,8 +34,13 @@ public class CollegeController {
     }
 
     @GetMapping(UriConstant.GET_ALL)
-    public ResponseEntity<List<CollegeDto>> GetAll() {
-        return new ResponseEntity<>(collegeService.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<CollegeDto>> GetAll(@RequestParam(required = false) String search,
+                                                   @RequestParam(required = false) Boolean status,
+                                                   @RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "10") int size,
+                                                   @RequestParam(defaultValue = "createdAt") String sortBy,
+                                                   @RequestParam(defaultValue = "desc") String sortOrder) {
+        return new ResponseEntity<>(collegeService.getAll(search, status, page, size, sortBy, sortOrder), HttpStatus.OK);
     }
 
     @DeleteMapping(UriConstant.DELETE + "/{id}")

@@ -1,5 +1,6 @@
 package com.cms.serviceImpl;
 
+import com.cms.dao.EnquiryDao;
 import com.cms.dto.EnquiryDto;
 import com.cms.entity.CollegeCourse;
 import com.cms.entity.Enquiry;
@@ -27,6 +28,9 @@ public class EnquiryServiceImpl implements EnquiryService {
 
     @Autowired
     private CollegeCourseRepository collegeCourseRepository;
+
+    @Autowired
+    private EnquiryDao enquiryDao;
 
     @Override
     public Enquiry save(EnquiryDto enquiryDto, Long collegeCourseId) {
@@ -65,8 +69,8 @@ public class EnquiryServiceImpl implements EnquiryService {
     }
 
     @Override
-    public List<EnquiryDto> getAll(Long collegeCourseId) {
-        List<Enquiry> enquiryList = enquiryRepository.findByCollegeCourseId(collegeCourseId);
+    public List<EnquiryDto> getAll(Long collegeCourseId, String search, int page, int size, String sortBy, String sortOrder) {
+        List<Enquiry> enquiryList = enquiryDao.findAllEnquiries(collegeCourseId, search, page, size, sortBy, sortOrder);
         List<EnquiryDto> enquiryDtos = new ArrayList<>();
 
         for (Enquiry enquiry : enquiryList) {

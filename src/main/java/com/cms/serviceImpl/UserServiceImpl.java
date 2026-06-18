@@ -1,5 +1,6 @@
 package com.cms.serviceImpl;
 
+import com.cms.dao.UserDao;
 import com.cms.dto.UserDto;
 import com.cms.entity.User;
 import com.cms.exception.GenericException;
@@ -26,6 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public User registerUser(UserDto userDto) {
@@ -56,8 +60,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getAll() {
-        List<User> users = userRepository.findAll();
+    public List<UserDto> getAll(String search, Boolean status, int page, int size, String sortBy, String sortOrder) {
+        List<User> users = userDao.findAllUsers(search, status, page, size, sortBy, sortOrder);
         List<UserDto> userDtos = new ArrayList<>();
 
         for (User user : users) {
