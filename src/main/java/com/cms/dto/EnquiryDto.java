@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class EnquiryDto {
 
+    private Long id;
+
     private String studentName;
 
     private String mobile;

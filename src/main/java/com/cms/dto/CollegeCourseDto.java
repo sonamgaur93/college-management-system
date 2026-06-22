@@ -7,9 +7,7 @@ import java.math.BigDecimal;
 @Data
 public class CollegeCourseDto {
 
-//    private Long courseId;
-//
-//    private Long collegeId;
+    private Long id;
 
     private BigDecimal fees;
 

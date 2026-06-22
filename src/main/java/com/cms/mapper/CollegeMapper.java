@@ -35,6 +35,7 @@ public class CollegeMapper {
 
     public CollegeDto toDto(College college) {
         CollegeDto collegeDto = new CollegeDto();
+        collegeDto.setId(college.getId());
         collegeDto.setCollegeName(college.getCollegeName());
         collegeDto.setCode(college.getCode());
         collegeDto.setAddress(college.getAddress());

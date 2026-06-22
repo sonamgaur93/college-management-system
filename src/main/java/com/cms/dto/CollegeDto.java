@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class CollegeDto {
 
+    private Long id;
+
     private String collegeName;
 
     private String code;

@@ -33,6 +33,7 @@ public class UserMapper {
 
     public UserDto toDto(User user) {
         UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
         userDto.setFullName(user.getFullName());
         userDto.setEmail(user.getEmail());
         userDto.setRole(user.getRole());

@@ -31,6 +31,7 @@ public class EnquiryMapper {
 
     public EnquiryDto toDto(Enquiry enquiry) {
         EnquiryDto enquiryDto = new EnquiryDto();
+        enquiryDto.setId(enquiry.getId());
         enquiryDto.setStudentName(enquiry.getStudentName());
         enquiryDto.setEmail(enquiry.getEmail());
         enquiryDto.setMobile(enquiry.getMobile());

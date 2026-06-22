@@ -31,6 +31,7 @@ public class CollegeCourseMapper {
 
     public CollegeCourseDto toDto(CollegeCourse collegeCourse) {
         CollegeCourseDto collegeCourseDto = new CollegeCourseDto();
+        collegeCourseDto.setId(collegeCourse.getId());
         collegeCourseDto.setFees(collegeCourse.getFees());
         collegeCourseDto.setTotalSeats(collegeCourse.getTotalSeats());
         collegeCourseDto.setAvailableSeats(collegeCourse.getAvailableSeats());

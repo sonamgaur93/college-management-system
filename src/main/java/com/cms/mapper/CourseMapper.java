@@ -27,6 +27,7 @@ public class CourseMapper {
 
     public CourseDto toDto(Course course) {
         CourseDto courseDto = new CourseDto();
+        courseDto.setId(course.getId());
         courseDto.setCourseName(course.getCourseName());
         courseDto.setDescription(course.getDescription());
         courseDto.setDuration(course.getDuration());
