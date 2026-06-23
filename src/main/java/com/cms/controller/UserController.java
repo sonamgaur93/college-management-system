@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @DeleteMapping(UriConstant.DELETE + "/{id}")
-    public ResponseEntity<User> delete(@PathVariable Long id) {
-        return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
+    public void delete(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }

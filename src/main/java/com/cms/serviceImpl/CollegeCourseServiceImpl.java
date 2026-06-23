@@ -5,11 +5,13 @@ import com.cms.dto.CollegeCourseDto;
 import com.cms.entity.College;
 import com.cms.entity.CollegeCourse;
 import com.cms.entity.Course;
+import com.cms.entity.Enquiry;
 import com.cms.exception.GenericException;
 import com.cms.mapper.CollegeCourseMapper;
 import com.cms.repository.CollegeCourseRepository;
 import com.cms.repository.CollegeRepository;
 import com.cms.repository.CourseRepository;
+import com.cms.repository.EnquiryRepository;
 import com.cms.service.CollegeCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +38,9 @@ public class CollegeCourseServiceImpl implements CollegeCourseService {
 
     @Autowired
     private CollegeCourseDao collegeCourseDao;
+
+    @Autowired
+    private EnquiryRepository enquiryRepository;
 
 
     @Override
@@ -92,13 +97,15 @@ public class CollegeCourseServiceImpl implements CollegeCourseService {
     }
 
     @Override
-    public CollegeCourseDto delete(Long id, Long collegeId, Long courseId) {
+    public void delete(Long id, Long collegeId, Long courseId) {
         CollegeCourse collegeCourse = collegeCourseRepository.findByCollegeAndCourseIdAndId(id, collegeId, courseId).orElseThrow(() ->
                 new GenericException("College course id does not exist", HttpStatus.NOT_FOUND));
 
-        collegeCourse.setStatus(Boolean.FALSE);
-        collegeCourseRepository.save(collegeCourse);
+        List<Enquiry> enquiryList = enquiryRepository.findByCollegeCourseId(collegeCourse.getId());
+          if (!enquiryList.isEmpty()) {
+            throw new GenericException("CollegeCourse id is associated with enquiry", HttpStatus.BAD_REQUEST);
+        }
 
-        return collegeCourseMapper.toDto(collegeCourse);
+        collegeCourseRepository.delete(collegeCourse);
     }
 }

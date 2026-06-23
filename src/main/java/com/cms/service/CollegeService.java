@@ -15,5 +15,5 @@ public interface CollegeService {
 
     List<CollegeDto> getAll(String search, Boolean status, int page, int size, String sortBy, String sortOrder);
 
-    College delete(Long id);
+    void delete(Long id);
 }

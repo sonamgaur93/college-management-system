@@ -15,5 +15,5 @@ public interface EnquiryService {
 
     List<EnquiryDto> getAll(Long collegeCourseId,String search, int page, int size, String sortBy, String sortOrder);
 
-    EnquiryDto delete(Long id,  Long collegeCourseId);
+    void delete(Long id,  Long collegeCourseId);
 }

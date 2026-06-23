@@ -15,5 +15,5 @@ public interface CollegeCourseService {
 
     List<CollegeCourseDto> getAll(Long collegeId, Long courseId,String search, Boolean status,Boolean admissionOpen, int page, int size, String sortBy, String sortOrder);
 
-    CollegeCourseDto delete(Long id, Long collegeId, Long courseId);
+    void delete(Long id, Long collegeId, Long courseId);
 }

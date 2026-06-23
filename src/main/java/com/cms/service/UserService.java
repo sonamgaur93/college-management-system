@@ -15,5 +15,5 @@ public interface UserService {
 
     List<UserDto> getAll(String search, Boolean status, int page, int size, String sortBy, String sortOrder);
 
-    User deleteUser(Long id);
+    void deleteUser(Long id);
 }

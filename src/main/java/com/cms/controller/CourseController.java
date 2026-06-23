@@ -44,7 +44,7 @@ public class CourseController {
     }
 
     @DeleteMapping(UriConstant.DELETE + "/{id}")
-    public ResponseEntity<Course> delete(@PathVariable Long id) {
-        return new ResponseEntity<>(courseService.delete(id), HttpStatus.OK);
+    public void delete(@PathVariable Long id) {
+        courseService.delete(id);
     }
 }

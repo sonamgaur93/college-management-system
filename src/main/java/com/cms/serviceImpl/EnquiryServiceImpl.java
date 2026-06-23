@@ -81,13 +81,10 @@ public class EnquiryServiceImpl implements EnquiryService {
     }
 
     @Override
-    public EnquiryDto delete(Long id, Long collegeCourseId) {
+    public void delete(Long id, Long collegeCourseId) {
         Enquiry enquiry = enquiryRepository.findByCollegeCourseIdAndId(collegeCourseId, id).orElseThrow(() ->
                 new GenericException("College course id does not exist ", HttpStatus.NOT_FOUND));
 
-        enquiry.setDeleted(Boolean.TRUE);
-        enquiryRepository.save(enquiry);
-
-        return enquiryMapper.toDto(enquiry);
+        enquiryRepository.delete(enquiry);
     }
 }

@@ -73,12 +73,10 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User deleteUser(Long id) {
+    public void deleteUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new
                 GenericException("User id does not exist", HttpStatus.NOT_FOUND));
 
-        user.setStatus(Boolean.FALSE);
-        userRepository.save(user);
-        return user;
+        userRepository.delete(user);
     }
 }

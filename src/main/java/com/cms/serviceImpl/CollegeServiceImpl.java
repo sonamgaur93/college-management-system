@@ -3,8 +3,10 @@ package com.cms.serviceImpl;
 import com.cms.dao.CollegeDao;
 import com.cms.dto.CollegeDto;
 import com.cms.entity.College;
+import com.cms.entity.CollegeCourse;
 import com.cms.exception.GenericException;
 import com.cms.mapper.CollegeMapper;
+import com.cms.repository.CollegeCourseRepository;
 import com.cms.repository.CollegeRepository;
 import com.cms.service.CollegeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class CollegeServiceImpl implements CollegeService {
 
     @Autowired
     private CollegeDao collegeDao;
+
+    @Autowired
+    private CollegeCourseRepository collegeCourseRepository;
 
     @Override
     public College save(CollegeDto collegeDto) {
@@ -73,11 +78,15 @@ public class CollegeServiceImpl implements CollegeService {
     }
 
     @Override
-    public College delete(Long id) {
+    public void delete(Long id) {
         College college = collegeRepository.findById(id).orElseThrow(() -> new
                 GenericException("College id does not exist", HttpStatus.NOT_FOUND));
 
-        college.setStatus(Boolean.FALSE);
-        return collegeRepository.save(college);
+        List<CollegeCourse> collegeCourseList = collegeCourseRepository.findByCollegeId(college.getId());
+        if (!collegeCourseList.isEmpty()) {
+            throw new GenericException("College is associated with collegeCourse ", HttpStatus.BAD_REQUEST);
+        }
+
+        collegeRepository.delete(college);
     }
 }

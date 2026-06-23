@@ -2,9 +2,11 @@ package com.cms.serviceImpl;
 
 import com.cms.dao.CourseDao;
 import com.cms.dto.CourseDto;
+import com.cms.entity.CollegeCourse;
 import com.cms.entity.Course;
 import com.cms.exception.GenericException;
 import com.cms.mapper.CourseMapper;
+import com.cms.repository.CollegeCourseRepository;
 import com.cms.repository.CourseRepository;
 import com.cms.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private CourseDao courseDao;
+
+    @Autowired
+    private CollegeCourseRepository collegeCourseRepository;
 
     @Override
     public Course save(CourseDto courseDto) {
@@ -55,7 +60,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<CourseDto> getAll(String search, Boolean status, int page, int size, String sortBy, String sortOrder) {
-        List<Course> courses = courseDao.findAllCourses(search,status,page,size,sortBy,sortOrder);
+        List<Course> courses = courseDao.findAllCourses(search, status, page, size, sortBy, sortOrder);
         List<CourseDto> courseDtos = new ArrayList<>();
 
         for (Course course : courses) {
@@ -66,11 +71,15 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public Course delete(Long id) {
+    public void delete(Long id) {
         Course course = courseRepository.findById(id).orElseThrow(() ->
                 new GenericException("Course id does not exist", HttpStatus.NOT_FOUND));
 
-        course.setStatus(Boolean.FALSE);
-        return courseRepository.save(course);
+        List<CollegeCourse> collegeCourseList = collegeCourseRepository.findByCourseId(course.getId());
+        if (!collegeCourseList.isEmpty()) {
+            throw new GenericException("Course is associate with collegeCourse", HttpStatus.BAD_REQUEST);
+        }
+
+        courseRepository.delete(course);
     }
 }

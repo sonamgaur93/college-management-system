@@ -50,8 +50,8 @@ public class CollegeCourseController {
     }
 
     @DeleteMapping(UriConstant.DELETE + "/{id}")
-    public ResponseEntity<CollegeCourseDto> delete(@RequestParam("collegeId") Long collegeId,
-                                                   @RequestParam("courseId") Long courseId, @PathVariable Long id) {
-        return new ResponseEntity<>(collegeCourseService.delete(id, collegeId, courseId), HttpStatus.OK);
+    public void delete(@RequestParam("collegeId") Long collegeId,
+                       @RequestParam("courseId") Long courseId, @PathVariable Long id) {
+        collegeCourseService.delete(id, collegeId, courseId);
     }
 }
