@@ -2,6 +2,7 @@ package com.cms.controller;
 
 import com.cms.constant.UriConstant;
 import com.cms.dto.CourseDto;
+import com.cms.dto.ResponseDto;
 import com.cms.entity.Course;
 import com.cms.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,10 @@ public class CourseController {
     @DeleteMapping(UriConstant.DELETE + "/{id}")
     public void delete(@PathVariable Long id) {
         courseService.delete(id);
+    }
+
+    @GetMapping(UriConstant.GET_ID_NAME)
+    public ResponseEntity<List<ResponseDto>> getIdAndName(){
+        return new ResponseEntity<>(courseService.getIdAndName(), HttpStatus.OK);
     }
 }

@@ -25,20 +25,22 @@ public class CollegeCourseController {
     }
 
     @PutMapping(UriConstant.UPDATE)
-    public ResponseEntity<CollegeCourseDto> update(@RequestBody CollegeCourseDto collegeCourseDto, @RequestParam("collegeId") Long collegeId,
-                                                   @RequestParam("courseId") Long courseId, @PathVariable Long id) {
+    public ResponseEntity<CollegeCourseDto> update(@RequestBody CollegeCourseDto collegeCourseDto,
+                                                   @RequestParam(value = "collegeId", required = false) Long collegeId,
+                                                   @RequestParam(value = "courseId", required = false) Long courseId,
+                                                   @PathVariable Long id) {
         return new ResponseEntity<>(collegeCourseService.update(id, collegeId, courseId, collegeCourseDto), HttpStatus.OK);
     }
 
     @GetMapping(UriConstant.GET_BY_ID)
-    public ResponseEntity<CollegeCourseDto> getById(@RequestParam("collegeId") Long collegeId,
-                                                    @RequestParam("courseId") Long courseId, @PathVariable Long id) {
+    public ResponseEntity<CollegeCourseDto> getById(@RequestParam(value = "collegeId", required = false) Long collegeId,
+                                                    @RequestParam(value = "courseId", required = false) Long courseId, @PathVariable Long id) {
         return new ResponseEntity<>(collegeCourseService.getById(id, collegeId, courseId), HttpStatus.OK);
     }
 
     @GetMapping(UriConstant.GET_ALL)
-    public ResponseEntity<List<CollegeCourseDto>> GetAll(@RequestParam("collegeId") Long collegeId,
-                                                         @RequestParam("courseId") Long courseId,
+    public ResponseEntity<List<CollegeCourseDto>> GetAll(@RequestParam(value = "collegeId", required = false) Long collegeId,
+                                                         @RequestParam(value = "courseId", required = false) Long courseId,
                                                          @RequestParam(required = false) String search,
                                                          @RequestParam(required = false) Boolean status,
                                                          @RequestParam(required = false) Boolean admissionOpen,
@@ -50,8 +52,9 @@ public class CollegeCourseController {
     }
 
     @DeleteMapping(UriConstant.DELETE + "/{id}")
-    public void delete(@RequestParam("collegeId") Long collegeId,
-                       @RequestParam("courseId") Long courseId, @PathVariable Long id) {
+    public void delete(@RequestParam(value = "collegeId", required = false) Long collegeId,
+                       @RequestParam(value = "courseId", required = false) Long courseId,
+                       @PathVariable Long id) {
         collegeCourseService.delete(id, collegeId, courseId);
     }
 }

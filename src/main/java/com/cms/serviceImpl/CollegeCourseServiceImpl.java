@@ -56,20 +56,22 @@ public class CollegeCourseServiceImpl implements CollegeCourseService {
 
     @Override
     public CollegeCourseDto update(Long id, Long collegeId, Long courseId, CollegeCourseDto collegeCourseDto) {
-        CollegeCourse collegeCourse = collegeCourseRepository.findByCollegeAndCourseIdAndId(id, collegeId, courseId).orElseThrow(() ->
+        CollegeCourse collegeCourse = collegeCourseRepository.findById(id).orElseThrow(() ->
                 new GenericException("College course id does not exist", HttpStatus.NOT_FOUND));
+
+        College college = collegeRepository.findById(collegeId).orElseThrow(() ->
+                new GenericException("College id does not exist", HttpStatus.NOT_FOUND));
+
+        Course course = courseRepository.findById(courseId).orElseThrow(() ->
+                new GenericException("Course id does not exist", HttpStatus.NOT_FOUND));
 
         collegeCourse.setFees(collegeCourseDto.getFees());
         collegeCourse.setTotalSeats(collegeCourseDto.getTotalSeats());
         collegeCourse.setAvailableSeats(collegeCourseDto.getAvailableSeats());
+        collegeCourse.setStartDate(collegeCourseDto.getStartDate());
+        collegeCourse.setCollege(college);
+        collegeCourse.setCourse(course);
 
-        if (collegeCourse.getCollege() != null) {
-            collegeCourse.setCollege(collegeCourse.getCollege());
-        }
-
-        if (collegeCourse.getCourse() != null) {
-            collegeCourse.setCourse(collegeCourse.getCourse());
-        }
         collegeCourse.setUpdatedAt(LocalDateTime.now());
         collegeCourse = collegeCourseRepository.save(collegeCourse);
 
@@ -102,7 +104,7 @@ public class CollegeCourseServiceImpl implements CollegeCourseService {
                 new GenericException("College course id does not exist", HttpStatus.NOT_FOUND));
 
         List<Enquiry> enquiryList = enquiryRepository.findByCollegeCourseId(collegeCourse.getId());
-          if (!enquiryList.isEmpty()) {
+        if (!enquiryList.isEmpty()) {
             throw new GenericException("CollegeCourse id is associated with enquiry", HttpStatus.BAD_REQUEST);
         }
 

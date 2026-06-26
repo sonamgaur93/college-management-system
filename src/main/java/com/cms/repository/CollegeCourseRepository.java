@@ -18,10 +18,13 @@ public interface CollegeCourseRepository extends JpaRepository<CollegeCourse, Lo
     @Query(value = "select * from college_courses s where s.course_id =:courseId", nativeQuery = true)
     List<CollegeCourse> findByCourseId(@Param("courseId") Long courseId);
 
-    @Query(value = "select * from college_courses s where s.id =:id and s.college_id =:collegeId and s.course_id =:courseId",
-            nativeQuery = true)
-    Optional<CollegeCourse> findByCollegeAndCourseIdAndId(@Param("id") Long id,
-                                                          @Param("collegeId") Long collegeId,
-                                                          @Param("courseId") Long courseId);
-
+    @Query(value = """
+            SELECT * FROM college_courses s 
+                WHERE s.id = :id AND (:collegeId IS NULL OR s.college_id = :collegeId) AND 
+                                  (:courseId IS NULL OR s.course_id = :courseId)
+            """, nativeQuery = true)
+    Optional<CollegeCourse> findByCollegeAndCourseIdAndId(
+            @Param("id") Long id,
+            @Param("collegeId") Long collegeId,
+            @Param("courseId") Long courseId);
 }

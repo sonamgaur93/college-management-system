@@ -21,6 +21,7 @@ public class CollegeCourseMapper {
         collegeCourse.setFees(collegeCourseDto.getFees());
         collegeCourse.setTotalSeats(collegeCourseDto.getTotalSeats());
         collegeCourse.setAvailableSeats(collegeCourseDto.getAvailableSeats());
+        collegeCourse.setStartDate(collegeCourseDto.getStartDate());
         collegeCourse.setCollege(college);
         collegeCourse.setCourse(course);
         collegeCourse.setCreatedAt(LocalDateTime.now());
@@ -35,6 +36,17 @@ public class CollegeCourseMapper {
         collegeCourseDto.setFees(collegeCourse.getFees());
         collegeCourseDto.setTotalSeats(collegeCourse.getTotalSeats());
         collegeCourseDto.setAvailableSeats(collegeCourse.getAvailableSeats());
+        collegeCourseDto.setStartDate(collegeCourse.getStartDate());
+
+        if (collegeCourse.getCollege() != null) {
+            collegeCourseDto.setCollegeName(collegeCourse.getCollege().getCollegeName());
+        }
+
+        if (collegeCourse.getCourse() != null) {
+            collegeCourseDto.setCourseName(collegeCourse.getCourse().getCourseName());
+            collegeCourseDto.setCourseDescription(collegeCourse.getCourse().getDescription());
+            collegeCourseDto.setCourseDuration(collegeCourse.getCourse().getDuration());
+        }
 
         return collegeCourseDto;
     }

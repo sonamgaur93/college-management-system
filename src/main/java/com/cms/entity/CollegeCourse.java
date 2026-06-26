@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -49,4 +50,7 @@ public class CollegeCourse {
 
     @Column(name = "updated_by")
     private Long updatedBy;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
 }

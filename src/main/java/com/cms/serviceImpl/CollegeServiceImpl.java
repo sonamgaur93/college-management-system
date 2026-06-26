@@ -2,6 +2,7 @@ package com.cms.serviceImpl;
 
 import com.cms.dao.CollegeDao;
 import com.cms.dto.CollegeDto;
+import com.cms.dto.ResponseDto;
 import com.cms.entity.College;
 import com.cms.entity.CollegeCourse;
 import com.cms.exception.GenericException;
@@ -88,5 +89,10 @@ public class CollegeServiceImpl implements CollegeService {
         }
 
         collegeRepository.delete(college);
+    }
+
+    @Override
+    public List<ResponseDto> getIdAndName() {
+        return collegeRepository.getCollegeNameAndId();
     }
 }
