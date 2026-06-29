@@ -40,6 +40,15 @@ public class EnquiryMapper {
 
         if (enquiry.getCollegeCourse() != null) {
             enquiryDto.setCollegeCourseId(enquiry.getCollegeCourse().getId());
+
+            if (enquiry.getCollegeCourse().getCourse() != null) {
+                enquiryDto.setCourseName(enquiry.getCollegeCourse().getCourse().getCourseName());
+            }
+
+            if (enquiry.getCollegeCourse().getCollege() != null) {
+                enquiryDto.setCollegeName(enquiry.getCollegeCourse().getCollege().getCollegeName());
+            }
+
         }
 
         return enquiryDto;

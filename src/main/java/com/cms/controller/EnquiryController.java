@@ -24,18 +24,20 @@ public class EnquiryController {
     }
 
     @PutMapping(UriConstant.UPDATE)
-    public ResponseEntity<EnquiryDto> update(@RequestBody EnquiryDto enquiryDto, @RequestParam("collegeCourseId") Long collegeCourseId,
+    public ResponseEntity<EnquiryDto> update(@RequestBody EnquiryDto enquiryDto,
+                                             @RequestParam(value = "collegeCourseId", required = false) Long collegeCourseId,
                                              @PathVariable Long id) {
         return new ResponseEntity<>(enquiryService.update(enquiryDto, id, collegeCourseId), HttpStatus.OK);
     }
 
     @GetMapping(UriConstant.GET_BY_ID)
-    public ResponseEntity<EnquiryDto> getById(@RequestParam("collegeCourseId") Long collegeCourseId, @PathVariable Long id) {
+    public ResponseEntity<EnquiryDto> getById(@RequestParam(value = "collegeCourseId", required = false) Long collegeCourseId,
+                                              @PathVariable Long id) {
         return new ResponseEntity<>(enquiryService.getById(id, collegeCourseId), HttpStatus.OK);
     }
 
     @GetMapping(UriConstant.GET_ALL)
-    public ResponseEntity<List<EnquiryDto>> GetAll(@RequestParam("collegeCourseId") Long collegeCourseId,
+    public ResponseEntity<List<EnquiryDto>> GetAll(@RequestParam(value = "collegeCourseId", required = false) Long collegeCourseId,
                                                    @RequestParam(required = false) String search,
                                                    @RequestParam(defaultValue = "0") int page,
                                                    @RequestParam(defaultValue = "10") int size,
@@ -45,7 +47,8 @@ public class EnquiryController {
     }
 
     @DeleteMapping(UriConstant.DELETE + "/{id}")
-    public void delete(@RequestParam("collegeCourseId") Long collegeCourseId, @PathVariable Long id) {
+    public void delete(@RequestParam(value = "collegeCourseId", required = false) Long collegeCourseId,
+                       @PathVariable Long id) {
         enquiryService.delete(id, collegeCourseId);
     }
 }

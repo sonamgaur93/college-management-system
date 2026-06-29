@@ -15,7 +15,10 @@ public interface EnquiryRepository extends JpaRepository<Enquiry, Long> {
     @Query("select s from Enquiry s where s.collegeCourse.id =:collegeCourseId")
     List<Enquiry> findByCollegeCourseId(@Param("collegeCourseId") Long collegeCourseId);
 
-    @Query("select s from Enquiry s where s.collegeCourse.id =:collegeCourseId and s.id =:id")
+    @Query(value = """
+            SELECT * FROM enquiries s 
+                WHERE s.id = :id AND (:collegeCourseId IS NULL OR s.college_course_id = :collegeCourseId)
+            """, nativeQuery = true)
     Optional<Enquiry> findByCollegeCourseIdAndId(@Param("collegeCourseId") Long collegeCourseId,
                                                  @Param("id") Long id);
 }

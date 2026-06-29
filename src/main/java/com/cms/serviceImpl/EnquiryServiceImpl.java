@@ -63,7 +63,7 @@ public class EnquiryServiceImpl implements EnquiryService {
     @Override
     public EnquiryDto getById(Long id, Long collegeCourseId) {
         Enquiry enquiry = enquiryRepository.findByCollegeCourseIdAndId(collegeCourseId, id).orElseThrow(() ->
-                new GenericException("College course id does not exist ", HttpStatus.NOT_FOUND));
+                new GenericException("Enquiry id does not exist ", HttpStatus.NOT_FOUND));
 
         return enquiryMapper.toDto(enquiry);
     }

@@ -19,4 +19,8 @@ public class EnquiryDto {
 
     private Long collegeCourseId;
 
+    private String collegeName;
+
+    private String courseName;
+
 }
