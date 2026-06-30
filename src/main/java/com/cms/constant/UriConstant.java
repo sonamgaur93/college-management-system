@@ -27,4 +27,10 @@ public class UriConstant {
     public static final String ENQUIRY = "/enquiry";
 
     public static final String GET_ID_NAME = "/get_id_and_name";
+
+    public static final String OTP = "/otp";
+
+    public static final String GENERATE = "/generate";
+
+    public static final String VERIFY = "/verify";
 }

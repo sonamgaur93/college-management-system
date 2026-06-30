@@ -45,4 +45,7 @@ public class User {
 
     @Column(name = "user_name")
     private String username;
+
+    @Column(name = "mobile_number")
+    private String mobileNumber;
 }

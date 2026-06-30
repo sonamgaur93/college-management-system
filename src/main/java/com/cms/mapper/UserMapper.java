@@ -24,6 +24,7 @@ public class UserMapper {
         user.setEmail(userDto.getEmail());
         user.setRole(userDto.getRole());
         user.setUsername(userDto.getEmail());
+        user.setMobileNumber(userDto.getMobileNo());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
@@ -38,6 +39,7 @@ public class UserMapper {
         userDto.setEmail(user.getEmail());
         userDto.setRole(user.getRole());
         userDto.setPassword(user.getPassword());
+        userDto.setMobileNo(user.getMobileNumber());
 
         return userDto;
     }
